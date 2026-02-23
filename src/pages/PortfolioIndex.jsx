@@ -12,50 +12,52 @@ const projects = [
 
 export default function PortfolioIndex() {
     const listRef = useRef(null);
-    const cursorRef = useRef(null);
-    const cursorImgRef = useRef(null);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            const xTo = gsap.quickTo(cursorRef.current, "x", { duration: 0.6, ease: "power3" });
-            const yTo = gsap.quickTo(cursorRef.current, "y", { duration: 0.6, ease: "power3" });
-
-            const handleMouseMove = (e) => {
-                xTo(e.clientX);
-                yTo(e.clientY);
-            };
-
-            window.addEventListener("mousemove", handleMouseMove);
-
             const rows = gsap.utils.toArray('.portfolio-row');
+
             rows.forEach((row) => {
-                row.addEventListener("mouseenter", (e) => {
-                    const imgUrl = row.getAttribute('data-image');
-                    cursorImgRef.current.src = imgUrl;
-                    gsap.to(cursorRef.current, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" });
+                const imgContainer = row.querySelector('.img-container');
+                const img = row.querySelector('.portfolio-img');
+
+                // Initialize styles to prevent jumping before GSAP takes over
+                gsap.set(imgContainer, { height: 0, marginTop: 0 });
+                gsap.set(img, { scale: 1.15, yPercent: -10 });
+
+                row.expandAnim = gsap.to(imgContainer, {
+                    height: window.innerWidth > 1024 ? 500 : (window.innerWidth > 768 ? 400 : 250),
+                    marginTop: window.innerWidth > 768 ? 40 : 20,
+                    duration: 0.85,
+                    ease: "power3.inOut",
+                    paused: true
                 });
+
+                row.scaleAnim = gsap.to(img, {
+                    scale: 1,
+                    yPercent: 0,
+                    duration: 0.85,
+                    ease: "power3.inOut",
+                    paused: true
+                });
+
+                row.addEventListener("mouseenter", () => {
+                    row.expandAnim.play();
+                    row.scaleAnim.play();
+                });
+
                 row.addEventListener("mouseleave", () => {
-                    gsap.to(cursorRef.current, { scale: 0.5, opacity: 0, duration: 0.4, ease: "power2.out" });
+                    row.expandAnim.reverse();
+                    row.scaleAnim.reverse();
                 });
             });
 
-            return () => {
-                window.removeEventListener("mousemove", handleMouseMove);
-            };
         }, listRef);
         return () => ctx.revert();
     }, []);
 
     return (
-        <div ref={listRef} className="w-full min-h-screen pt-32 pb-48 bg-background text-dark relative selection:bg-accent selection:text-background overflow-hidden cursor-default md:cursor-crosshair">
-
-            {/* Custom Cursor Image Container */}
-            <div
-                ref={cursorRef}
-                className="fixed top-0 left-0 w-[450px] aspect-[4/5] pointer-events-none z-0 rounded-[2rem] overflow-hidden opacity-0 scale-50 -translate-x-1/2 -translate-y-1/2 mix-blend-multiply transition-shadow duration-500 shadow-2xl shadow-dark/20 hidden md:block"
-            >
-                <img ref={cursorImgRef} src="" alt="Preview" className="w-full h-full object-cover" />
-            </div>
+        <div ref={listRef} className="w-full min-h-screen pt-32 pb-48 bg-background text-dark relative selection:bg-accent selection:text-background">
 
             <div className="px-6 md:px-12 w-full max-w-7xl mx-auto relative z-10">
                 <div className="mb-24 mt-12 md:mt-20">
@@ -72,21 +74,35 @@ export default function PortfolioIndex() {
                         <Link
                             key={project.id}
                             to={`/portfolio/${project.id}`}
-                            data-image={project.image}
-                            className="portfolio-row group flex flex-col md:flex-row items-start md:items-center justify-between py-10 md:py-16 border-b border-dark/10 hover:border-dark/30 transition-colors duration-500 relative cursor-pointer"
+                            className="portfolio-row group flex flex-col py-8 md:py-12 border-b border-dark/10 hover:border-dark/30 transition-colors duration-500 relative cursor-pointer"
                         >
-                            <h2 className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl text-dark tracking-tighter mb-4 md:mb-0 transform transition-transform duration-500 group-hover:translate-x-6 origin-left">
-                                {project.name}
-                            </h2>
+                            {/* Hover slide background */}
+                            <div className="absolute inset-0 bg-dark/5 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] -z-10"></div>
 
-                            <div className="flex flex-row items-center justify-between md:justify-end gap-4 md:gap-16 w-full md:w-auto transform transition-transform duration-500 group-hover:-translate-x-6">
-                                <span className="font-serif italic text-dark/50 text-base md:text-xl group-hover:text-dark transition-colors duration-500">
-                                    {project.sector}
-                                </span>
-                                <span className="font-mono text-dark font-medium text-xs md:text-base border border-dark/10 px-4 py-2 rounded-full group-hover:border-dark/30 group-hover:bg-dark group-hover:text-background transition-all duration-500 text-right">
-                                    {project.metric}
-                                </span>
+                            {/* Top Text Row */}
+                            <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full px-4 md:px-8">
+                                <h2 className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl text-dark tracking-tighter mb-4 md:mb-0 transform transition-transform duration-700 ease-out group-hover:translate-x-4">
+                                    {project.name}
+                                </h2>
+
+                                <div className="flex flex-row items-center justify-between md:justify-end gap-4 md:gap-16 w-full md:w-auto transform transition-transform duration-700 ease-out group-hover:-translate-x-4">
+                                    <span className="font-serif italic text-dark/50 text-base md:text-xl group-hover:text-dark transition-colors duration-500">
+                                        {project.sector}
+                                    </span>
+                                    <span className="font-mono text-dark font-medium text-xs md:text-base border border-dark/10 px-4 py-2 rounded-full group-hover:border-dark/30 group-hover:bg-dark group-hover:text-background transition-all duration-500 text-right">
+                                        {project.metric}
+                                    </span>
+                                </div>
                             </div>
+
+                            {/* Expandable Image Accordion */}
+                            <div className="img-container w-full overflow-hidden px-4 md:px-8">
+                                <div className="w-full h-full relative rounded-2xl md:rounded-[2rem] overflow-hidden bg-dark shadow-inset-image">
+                                    <div className="absolute inset-0 bg-dark/20 z-10 mix-blend-multiply transition-colors duration-700 group-hover:bg-transparent"></div>
+                                    <img src={project.image} alt={project.name} className="portfolio-img w-full h-full object-cover origin-center" />
+                                </div>
+                            </div>
+
                         </Link>
                     ))}
                 </div>
