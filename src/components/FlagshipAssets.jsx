@@ -62,11 +62,10 @@ const FlagshipAssets = () => {
     return (
         <section ref={sectionRef} className="flagship-section relative w-full h-screen overflow-hidden bg-background text-dark z-20 border-t border-dark/10">
             {/* Header overlay */}
-            <div className="absolute top-8 left-6 md:top-12 md:left-12 lg:left-24 z-50 pointer-events-none">
-                <h2 className="font-drama italic text-3xl md:text-5xl lg:text-5xl text-primary drop-shadow-sm">Flagship Assets.</h2>
-                <div className="flex items-center gap-2 mt-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent"></span>
-                    <span className="text-[10px] font-sans tracking-widest uppercase text-dark/50 mt-0.5">Verified Case Studies</span>
+            <div className="absolute top-24 left-6 md:top-32 md:left-12 lg:top-40 lg:left-24 z-50 pointer-events-none">
+                <div className="flex items-center gap-2 mt-2 bg-background/50 backdrop-blur-md px-4 py-2 rounded-full border border-dark/10 shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+                    <span className="text-[10px] font-mono tracking-widest uppercase text-dark/70 mt-0.5">Verified Case Studies</span>
                 </div>
             </div>
 
@@ -75,7 +74,7 @@ const FlagshipAssets = () => {
                     <div key={i} className="flagship-panel w-screen h-full flex flex-col md:flex-row relative">
 
                         {/* Text Half */}
-                        <div className="w-full md:w-[45%] lg:w-[40%] h-[50%] md:h-full flex flex-col justify-end p-8 md:p-16 lg:p-24 bg-background relative z-10 border-r border-dark/10 shadow-2xl">
+                        <div className="w-full md:w-[45%] lg:w-[40%] h-[50%] md:h-full flex flex-col justify-center pt-32 pb-8 px-8 md:pt-48 md:pb-16 md:px-16 lg:pt-56 lg:pb-24 lg:px-24 bg-background relative z-10 border-r border-dark/10 shadow-2xl">
                             <div className="max-w-xl md:mb-12">
                                 <h3 className="font-sans font-bold text-3xl md:text-5xl lg:text-5xl xl:text-6xl text-dark mb-4 tracking-tighter leading-[0.9]">{asset.title}</h3>
                                 <p className="font-sans text-lg md:text-xl text-dark/70 tracking-wide mb-6">{asset.location}</p>
