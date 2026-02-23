@@ -1,6 +1,8 @@
 import React from 'react';
+import TransitionLink from './TransitionLink';
 
 export default function Footer() {
+
     return (
         <footer className="bg-dark text-background pt-24 pb-12 px-6 rounded-t-[4rem] relative z-20 mt-[-2rem]">
             <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-background/10 pb-16">
@@ -24,10 +26,10 @@ export default function Footer() {
                 <div className="md:col-span-2 md:col-start-8">
                     <h4 className="font-mono text-xs uppercase tracking-widest text-background/40 mb-6">Framework</h4>
                     <ul className="space-y-4 font-sans text-sm text-background/80">
-                        <li><a href="#" className="hover:text-accent transition-colors">Philosophy</a></li>
-                        <li><a href="#" className="hover:text-accent transition-colors">Protocol</a></li>
-                        <li><a href="#" className="hover:text-accent transition-colors">Artifacts</a></li>
-                        <li><a href="#" className="hover:text-accent transition-colors">Portfolio</a></li>
+                        <li><TransitionLink to="/" className="hover:text-accent transition-colors">Philosophy</TransitionLink></li>
+                        <li><TransitionLink to="/" className="hover:text-accent transition-colors">Protocol</TransitionLink></li>
+                        <li><TransitionLink to="/portfolio" className="hover:text-accent transition-colors">Archive</TransitionLink></li>
+                        <li><TransitionLink to="/firm" className="hover:text-accent transition-colors">The Firm</TransitionLink></li>
                     </ul>
                 </div>
 

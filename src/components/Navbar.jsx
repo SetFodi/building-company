@@ -1,5 +1,6 @@
 import React, { useRef, useLayoutEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import TransitionLink from './TransitionLink';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -43,22 +44,22 @@ export default function Navbar() {
                 className="group pointer-events-auto flex items-center justify-between w-full max-w-5xl px-6 py-4 rounded-full transition-all duration-500 bg-transparent border border-transparent [&.scrolled]:bg-background/80 [&.scrolled]:backdrop-blur-xl [&.scrolled]:border-dark/10 [&.scrolled]:shadow-sm"
             >
                 <div className={`font-sans font-bold tracking-tight text-2xl group-[.scrolled]:text-primary transition-colors duration-500 ${logoColor}`}>
-                    <Link to="/">Comfort Building</Link>
+                    <TransitionLink to="/">Comfort Building</TransitionLink>
                 </div>
 
                 <div className={`hidden md:flex items-center space-x-8 text-base font-medium group-[.scrolled]:text-primary transition-colors duration-500 ${linksColor}`}>
-                    <Link to="/" className="hover-lift">Home</Link>
-                    <Link to="/firm" className="hover-lift">The Firm</Link>
-                    <Link to="/portfolio" className="hover-lift">Archive</Link>
-                    <Link to="/inquiries" className="hover-lift">Inquiries</Link>
+                    <TransitionLink to="/" className="hover-lift">Home</TransitionLink>
+                    <TransitionLink to="/firm" className="hover-lift">The Firm</TransitionLink>
+                    <TransitionLink to="/portfolio" className="hover-lift">Archive</TransitionLink>
+                    <TransitionLink to="/inquiries" className="hover-lift">Inquiries</TransitionLink>
                 </div>
 
-                <Link to="/portfolio" className="magnetic-btn inline-flex bg-accent text-background px-6 py-2.5 text-sm font-medium group">
+                <TransitionLink to="/portfolio" className="magnetic-btn inline-flex bg-accent text-background px-6 py-2.5 text-sm font-medium group">
                     <span className="magnetic-btn-bg"></span>
                     <span className="relative z-10 flex items-center gap-2">
                         View Portfolio
                     </span>
-                </Link>
+                </TransitionLink>
             </nav>
         </div>
     );

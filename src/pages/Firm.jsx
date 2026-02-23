@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import TransitionLink from '../components/TransitionLink';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -112,12 +112,12 @@ export default function Firm() {
                     <div className="w-full md:w-1/3">
                         <h2 className="font-sans font-bold text-4xl md:text-6xl tracking-tighter leading-none mb-6">The <br />Methodology.</h2>
                         <p className="font-sans text-dark/70 text-lg leading-relaxed mb-8">Comfort Building utilizes a quantitative approach to structural acquisition, merging biometric urban analysis with aggressive capital deployment.</p>
-                        <Link to="/portfolio" className="magnetic-btn inline-flex bg-dark text-background px-8 py-3 rounded-full text-sm font-medium group">
+                        <TransitionLink to="/portfolio" className="magnetic-btn inline-flex bg-dark text-background px-8 py-3 rounded-full text-sm font-medium group">
                             <span className="magnetic-btn-bg bg-primary"></span>
                             <span className="relative z-10 flex items-center gap-2">
                                 View Master Portfolio
                             </span>
-                        </Link>
+                        </TransitionLink>
                     </div>
 
                     <div className="w-full md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-12 lg:gap-16">

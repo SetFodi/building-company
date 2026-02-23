@@ -1,17 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import TwinTowers from './TwinTowers';
 
 const Preloader = ({ onComplete }) => {
-    const [progress, setProgress] = useState(0);
     const containerRef = useRef(null);
-    const counterRef = useRef(null);
-    const barRef = useRef(null);
 
     useEffect(() => {
         // Lock scrolling during preloader
         document.body.style.overflow = 'hidden';
 
         const ctx = gsap.context(() => {
+            const blocks = containerRef.current.querySelectorAll('.p-block');
+            gsap.set(blocks, { y: -60, opacity: 0 });
+            gsap.set('.p-text', { opacity: 0 });
+
             const tl = gsap.timeline({
                 onComplete: () => {
                     document.body.style.overflow = '';
@@ -19,24 +21,19 @@ const Preloader = ({ onComplete }) => {
                 }
             });
 
-            // Simulate asset loading parsing over 1.8 seconds
-            tl.to({ val: 0 }, {
-                val: 100,
-                duration: 1.8,
-                ease: "power2.inOut",
-                onUpdate: function () {
-                    setProgress(Math.round(this.targets()[0].val));
-                }
-            }, 0)
-                // Animate progress bar width
-                .to(barRef.current, {
-                    scaleX: 1,
-                    duration: 1.8,
-                    ease: "power2.inOut"
-                }, 0)
-                // Slight pause at 100% for impact
-                .to({}, { duration: 0.2 })
-                // Wipe the preloader up
+            tl.to({}, { duration: 0.5 }) // Initial delay for safety
+                .to('.p-text', {
+                    opacity: 1,
+                    duration: 0.4
+                })
+                .to(blocks, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "back.out(1.5)"
+                }, "-=0.2")
+                .to({}, { duration: 0.6 }) // Wait for users to see the towers
                 .to(containerRef.current, {
                     yPercent: -100,
                     duration: 1.2,
@@ -54,28 +51,19 @@ const Preloader = ({ onComplete }) => {
         <div ref={containerRef} className="fixed inset-0 z-[9999] bg-dark flex flex-col items-center justify-center text-background px-6">
             <div className="absolute inset-0 bg-noise opacity-[0.05] pointer-events-none mix-blend-overlay"></div>
 
-            <div className="w-full max-w-sm flex flex-col items-center relative z-10">
-                <div className="flex justify-between w-full items-end mb-4">
-                    <span className="font-mono text-[10px] tracking-widest uppercase text-background/50">
-                        Initiating Architecture
-                    </span>
-                    <span className="font-mono font-bold text-3xl text-background">
-                        {progress.toString().padStart(3, '0')}%
-                    </span>
-                </div>
+            <div className="w-full max-w-sm flex flex-col items-center relative z-10 gap-8">
+                <TwinTowers blockClass="p-block" />
 
-                {/* Progress Bar */}
-                <div className="w-full h-[1px] bg-background/20 relative overflow-hidden">
-                    <div ref={barRef} className="absolute top-0 left-0 h-full w-full bg-accent origin-left scale-x-0"></div>
-                </div>
-
-                <div className="flex justify-between w-full mt-4">
-                    <span className="font-mono text-[10px] tracking-widest uppercase text-accent animate-pulse">
-                        System Operational
+                <div className="flex flex-col items-center gap-2 p-text">
+                    <span className="font-mono text-xs tracking-[0.3em] uppercase text-background/50 text-center">
+                        Initializing Framework
                     </span>
-                    <span className="font-mono text-[10px] tracking-widest uppercase text-background/30">
-                        AES-256
-                    </span>
+                    <div className="flex items-center gap-3">
+                        <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                        <span className="font-mono text-[10px] tracking-widest uppercase text-accent">
+                            System Boot
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

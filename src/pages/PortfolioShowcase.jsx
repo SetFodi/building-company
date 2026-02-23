@@ -1,11 +1,16 @@
 import React, { useLayoutEffect, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import TransitionLink from '../components/TransitionLink';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ... rest of imports stay the same
+
 const projectDB = {
+    // ... same as before
+
     vertex: {
         name: 'The Vertex Complex',
         sector: 'Mixed-Use / Active',
@@ -208,12 +213,12 @@ export default function PortfolioShowcase() {
                             <p className="font-sans text-dark/70 text-lg md:text-xl leading-relaxed max-w-md mb-12">
                                 {project.thesis}
                             </p>
-                            <Link to="/portfolio" className="magnetic-btn inline-flex bg-dark text-background px-8 py-3 rounded-full text-sm font-medium group">
+                            <TransitionLink to="/portfolio" className="magnetic-btn inline-flex bg-dark text-background px-8 py-3 rounded-full text-sm font-medium group">
                                 <span className="magnetic-btn-bg bg-primary"></span>
                                 <span className="relative z-10 flex items-center gap-2">
                                     Return to Archive
                                 </span>
-                            </Link>
+                            </TransitionLink>
                         </div>
                     </div>
 

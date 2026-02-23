@@ -4,7 +4,6 @@ import Features from '../components/Features';
 import Philosophy from '../components/Philosophy';
 import Protocol from '../components/Protocol';
 import FlagshipAssets from '../components/FlagshipAssets';
-import Membership from '../components/Membership';
 import Footer from '../components/Footer';
 import MetricsBar from '../components/MetricsBar';
 
@@ -17,7 +16,6 @@ export default function Home() {
             <Philosophy />
             <Protocol />
             <FlagshipAssets />
-            <Membership />
             <Footer />
         </div>
     );

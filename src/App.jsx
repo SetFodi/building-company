@@ -4,6 +4,7 @@ import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import { TransitionProvider } from './context/TransitionContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import PortfolioIndex from './pages/PortfolioIndex';
@@ -39,18 +40,20 @@ export default function App() {
 
   return (
     <Router>
-      <main className="w-full min-h-screen bg-background text-dark relative selection:bg-accent selection:text-background">
+      <TransitionProvider>
         <ScrollToTop />
         {loading && <Preloader onComplete={() => setLoading(false)} />}
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/firm" element={<Firm />} />
-          <Route path="/portfolio" element={<PortfolioIndex />} />
-          <Route path="/portfolio/:id" element={<PortfolioShowcase />} />
-          <Route path="/inquiries" element={<Inquiries />} />
-        </Routes>
-      </main>
+        <main className="w-full min-h-screen bg-background text-dark relative selection:bg-accent selection:text-background">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/firm" element={<Firm />} />
+            <Route path="/portfolio" element={<PortfolioIndex />} />
+            <Route path="/portfolio/:id" element={<PortfolioShowcase />} />
+            <Route path="/inquiries" element={<Inquiries />} />
+          </Routes>
+        </main>
+      </TransitionProvider>
     </Router>
   );
 }

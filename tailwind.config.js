@@ -7,15 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#F2F0E9', // Cream / Paper
-        primary: '#2E4036',   // Moss / Deep Green
-        accent: '#CC5833',    // Clay / Terracotta / Signal Red
-        dark: '#1A1A1A',      // Charcoal / Obsidian
+        background: '#FAF8F5',  // Ivory
+        primary: '#C9A84C',     // Champagne Gold Accent
+        secondary: '#2A2A35',   // Slate details
+        accent: '#C9A84C',      // Champagne
+        dark: '#0D0D12',        // Obsidian (The primary dark mode color)
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        drama: ['Instrument Serif', 'serif'],
-        mono: ['Geist Mono', 'monospace'],
+        serif: ['Playfair Display', 'serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+      },
+      keyframes: {
+        craneSwing: {
+          '0%, 100%': { transform: 'rotate(-5deg)' },
+          '50%': { transform: 'rotate(15deg)' }
+        },
+        cableDrop: {
+          '0%, 100%': { height: '16px' },
+          '50%': { height: '48px' }
+        },
+        tractorMove: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(24px)' }
+        }
+      },
+      animation: {
+        'crane-swing': 'craneSwing 4s ease-in-out infinite',
+        'cable-drop': 'cableDrop 4s ease-in-out infinite',
+        'tractor-move': 'tractorMove 3s ease-in-out infinite',
       }
     },
   },

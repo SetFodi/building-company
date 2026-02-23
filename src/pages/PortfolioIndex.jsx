@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import TransitionLink from '../components/TransitionLink';
 import gsap from 'gsap';
 
 const projects = [
@@ -71,7 +71,7 @@ export default function PortfolioIndex() {
 
                 <div className="flex flex-col border-t border-dark/10">
                     {projects.map((project) => (
-                        <Link
+                        <TransitionLink
                             key={project.id}
                             to={`/portfolio/${project.id}`}
                             className="portfolio-row group flex flex-col py-8 md:py-12 border-b border-dark/10 hover:border-dark/30 transition-colors duration-500 relative cursor-pointer"
@@ -103,7 +103,7 @@ export default function PortfolioIndex() {
                                 </div>
                             </div>
 
-                        </Link>
+                        </TransitionLink>
                     ))}
                 </div>
             </div>
