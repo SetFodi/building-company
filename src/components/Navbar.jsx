@@ -1,4 +1,5 @@
 import React, { useRef, useLayoutEffect } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -29,21 +30,20 @@ export default function Navbar() {
                 className="pointer-events-auto flex items-center justify-between w-full max-w-5xl px-6 py-4 rounded-full transition-all duration-500 bg-transparent text-background border border-transparent [&.scrolled]:bg-background/80 [&.scrolled]:backdrop-blur-xl [&.scrolled]:text-primary [&.scrolled]:border-dark/10 [&.scrolled]:shadow-sm"
             >
                 <div className="font-sans font-bold tracking-tight text-xl">
-                    Comfort Building
+                    <Link to="/">Comfort Building</Link>
                 </div>
 
                 <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
-                    <a href="#philosophy" className="hover-lift">Philosophy</a>
-                    <a href="#protocol" className="hover-lift">Protocol</a>
-                    <a href="#features" className="hover-lift">Features</a>
+                    <Link to="/" className="hover-lift">Home</Link>
+                    <Link to="/portfolio" className="hover-lift">Archive</Link>
                 </div>
 
-                <button className="magnetic-btn bg-accent text-background px-6 py-2.5 text-sm font-medium group">
+                <Link to="/portfolio" className="magnetic-btn inline-flex bg-accent text-background px-6 py-2.5 text-sm font-medium group">
                     <span className="magnetic-btn-bg"></span>
                     <span className="relative z-10 flex items-center gap-2">
                         View Portfolio
                     </span>
-                </button>
+                </Link>
             </nav>
         </div>
     );

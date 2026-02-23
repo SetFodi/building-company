@@ -1,21 +1,16 @@
 import React, { useLayoutEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import Philosophy from './components/Philosophy';
-import Protocol from './components/Protocol';
-import FlagshipAssets from './components/FlagshipAssets';
-import Membership from './components/Membership';
-import Footer from './components/Footer';
-import MetricsBar from './components/MetricsBar';
+import Home from './pages/Home';
+import PortfolioIndex from './pages/PortfolioIndex';
+import PortfolioShowcase from './pages/PortfolioShowcase';
 
-// Let's implement a simple smooth scroller using GSAP if desired,
-// We are implementing global Lenis smooth scrolling for cinematic GSAP performance.
-
-function App() {
+export default function App() {
+  // Lenis global initialization in App wrapper
   useLayoutEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -36,20 +31,30 @@ function App() {
       gsap.ticker.remove(lenis.raf);
     };
   }, []);
-  // If we wanted to add a global noise overlay it's already in index.css
+
   return (
-    <main className="w-full min-h-screen bg-background text-dark relative selection:bg-accent selection:text-background">
-      <Navbar />
-      <Hero />
-      <MetricsBar />
-      <Features />
-      <Philosophy />
-      <Protocol />
-      <FlagshipAssets />
-      <Membership />
-      <Footer />
-    </main>
+    <Router>
+      <main className="w-full min-h-screen bg-background text-dark relative selection:bg-accent selection:text-background">
+        <ScrollToTop />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/portfolio" element={<PortfolioIndex />} />
+          <Route path="/portfolio/:id" element={<PortfolioShowcase />} />
+        </Routes>
+      </main>
+    </Router>
   );
 }
 
-export default App;
+// Global scroll reset on route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+  }, [pathname]);
+  return null;
+}
