@@ -266,7 +266,7 @@ export default function PortfolioShowcase() {
                 <div className="w-full max-w-5xl mx-auto flex flex-col items-center">
                     <span className="font-mono text-primary text-sm tracking-widest uppercase mb-12 block">Asset Valuation & Yield</span>
 
-                    <div className="w-full flex-col font-mono text-sm md:text-base hidden sm:flex">
+                    <div className="w-full flex flex-col font-mono text-sm md:text-base hidden sm:flex">
                         <div className="grid grid-cols-4 border-b-2 border-dark/20 pb-4 mb-4 text-dark/50 font-bold uppercase tracking-widest">
                             <div>Fiscal Year</div>
                             <div>Internal Rate (IRR)</div>
@@ -280,6 +280,30 @@ export default function PortfolioShowcase() {
                                 <div className="text-primary">{fin.irr}</div>
                                 <div>{fin.occ}</div>
                                 <div className="text-right font-bold text-lg">{fin.val}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Mobile Fallback: Vertical Cards */}
+                    <div className="w-full flex flex-col sm:hidden gap-6 font-mono text-sm">
+                        {project.financials.map((fin, i) => (
+                            <div key={i} className="flex flex-col border border-dark/10 rounded-xl p-6 bg-background shadow-md">
+                                <div className="flex justify-between border-b border-dark/10 pb-4 mb-4">
+                                    <span className="text-dark/50 uppercase font-bold text-xs tracking-widest">Fiscal Year</span>
+                                    <span className="font-bold text-lg">{fin.year}</span>
+                                </div>
+                                <div className="flex justify-between mb-4">
+                                    <span className="text-dark/50 uppercase font-bold text-xs tracking-widest">IRR</span>
+                                    <span className="text-primary font-bold">{fin.irr}</span>
+                                </div>
+                                <div className="flex justify-between mb-4">
+                                    <span className="text-dark/50 uppercase font-bold text-xs tracking-widest">Occupancy</span>
+                                    <span>{fin.occ}</span>
+                                </div>
+                                <div className="flex justify-between border-t border-dark/10 pt-4 mt-2">
+                                    <span className="text-dark/50 uppercase font-bold text-xs tracking-widest">Valuation</span>
+                                    <span className="font-bold text-lg">{fin.val}</span>
+                                </div>
                             </div>
                         ))}
                     </div>

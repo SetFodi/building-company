@@ -107,19 +107,19 @@ export default function Protocol() {
                 >
                     <div className="w-full max-w-6xl h-full max-h-[800px] organic-card flex flex-col md:flex-row overflow-hidden shadow-2xl shadow-dark/5 relative">
 
-                        <div className="w-full md:w-1/2 p-10 md:p-20 flex flex-col justify-center border-r border-dark/5 bg-background relative z-10">
-                            <span className="font-mono text-accent text-lg mb-8 tracking-widest block">[{protocol.step}]</span>
-                            <h2 className="font-sans text-4xl md:text-5xl lg:text-6xl font-bold text-dark tracking-tight mb-6 text-balance">
+                        <div className="w-full md:w-1/2 p-6 pb-2 md:p-20 flex flex-col justify-center border-r border-dark/5 bg-background relative z-10">
+                            <span className="font-mono text-accent text-lg mb-4 md:mb-8 tracking-widest block">[{protocol.step}]</span>
+                            <h2 className="font-sans text-3xl md:text-5xl lg:text-6xl font-bold text-dark tracking-tight mb-4 md:mb-6 text-balance">
                                 {protocol.title}
                             </h2>
-                            <p className="font-sans text-dark/70 text-lg md:text-xl max-w-md leading-relaxed">
+                            <p className="font-sans text-dark/70 text-base md:text-xl max-w-md leading-relaxed">
                                 {protocol.desc}
                             </p>
                         </div>
 
-                        <div className="w-full md:w-1/2 bg-background/50 flex items-center justify-center p-10 md:p-20 relative overflow-hidden">
+                        <div className="w-full md:w-1/2 bg-background/50 flex items-center justify-center p-6 md:p-20 relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
-                            <div className="w-full aspect-square max-w-[400px] relative z-10 p-8 bg-background/50 rounded-full border border-dark/5 shadow-sm">
+                            <div className="w-full aspect-square max-w-[250px] md:max-w-[400px] relative z-10 p-6 md:p-8 bg-background/50 rounded-full border border-dark/5 shadow-sm">
                                 {protocol.anim}
                             </div>
                         </div>

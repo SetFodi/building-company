@@ -13,9 +13,9 @@ export default function Home() {
             <Hero />
             <MetricsBar />
             <Features />
-            <Philosophy />
-            <Protocol />
             <FlagshipAssets />
+            <Protocol />
+            <Philosophy />
             <Footer />
         </div>
     );
