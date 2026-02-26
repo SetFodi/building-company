@@ -9,7 +9,6 @@ export default function Firm() {
     const mainRef = useRef(null);
 
     useLayoutEffect(() => {
-        window.scrollTo(0, 0);
         const ctx = gsap.context(() => {
             // Animating the statistics count up
             const stats = gsap.utils.toArray('.stat-num');
@@ -54,7 +53,7 @@ export default function Firm() {
     }, []);
 
     return (
-        <div ref={mainRef} className="w-full bg-background text-dark pt-32 pb-32 selection:bg-accent selection:text-background overflow-hidden relative">
+        <div id="firm" ref={mainRef} className="w-full bg-background text-dark pt-32 pb-32 selection:bg-accent selection:text-background overflow-hidden relative">
 
             <svg className="absolute top-0 right-0 w-full h-[150vh] opacity-[0.03] pointer-events-none z-0" viewBox="0 0 1000 1000" preserveAspectRatio="none" fill="none" stroke="currentColor">
                 <path d="M 0 200 L 1000 200" strokeWidth="2" />

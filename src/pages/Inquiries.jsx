@@ -29,7 +29,6 @@ export default function Inquiries() {
     const mainRef = useRef(null);
 
     useLayoutEffect(() => {
-        window.scrollTo(0, 0);
         const ctx = gsap.context(() => {
             // Animate lines when inputs are focused
             const inputs = gsap.utils.toArray('.madlibs-input');
@@ -62,7 +61,7 @@ export default function Inquiries() {
     ];
 
     return (
-        <div ref={mainRef} className="w-full min-h-screen flex flex-col md:flex-row bg-background">
+        <div id="inquiries" ref={mainRef} className="w-full min-h-screen flex flex-col md:flex-row bg-background">
 
             {/* Left Column (Dark) */}
             <div className="w-full md:w-[45%] lg:w-[40%] min-h-[50vh] md:min-h-screen bg-dark text-background p-6 md:p-12 lg:p-24 flex flex-col justify-between relative overflow-hidden left-split-pin">

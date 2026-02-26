@@ -57,7 +57,7 @@ export default function PortfolioIndex() {
     }, []);
 
     return (
-        <div ref={listRef} className="w-full min-h-screen pt-32 pb-48 bg-background text-dark relative selection:bg-accent selection:text-background">
+        <div id="portfolio" ref={listRef} className="w-full min-h-screen pt-32 pb-48 bg-background text-dark relative selection:bg-accent selection:text-background">
 
             <div className="px-6 md:px-12 w-full max-w-7xl mx-auto relative z-10">
                 <div className="mb-24 mt-12 md:mt-20">

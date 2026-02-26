@@ -71,43 +71,38 @@ export default function Protocol() {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            const cards = gsap.utils.toArray('.protocol-card');
+            const cards = gsap.utils.toArray('.protocol-inner');
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: 'top top',
-                    end: `+=${(cards.length) * 100}%`,
-                    pin: true,
-                    scrub: 1,
-                }
+            // Apply a simple interior entrance animation when the card stacks into view
+            cards.forEach((card) => {
+                gsap.fromTo(card,
+                    { y: 50, opacity: 0, scale: 0.95 },
+                    {
+                        y: 0, opacity: 1, scale: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%", // triggers right as the card slides up
+                        }
+                    }
+                );
             });
-
-            cards.forEach((card, index) => {
-                if (index === cards.length - 1) return;
-                tl.to(card, {
-                    scale: 0.95,
-                    opacity: 0,
-                    ease: 'none'
-                });
-            });
-
         }, containerRef);
-
         return () => ctx.revert();
     }, []);
 
     return (
-        <section ref={containerRef} id="protocol" className="w-full bg-background relative h-screen overflow-hidden">
+        <section ref={containerRef} id="protocol" className="w-full bg-background relative">
             {protocols.map((protocol, i) => (
                 <div
                     key={i}
-                    className="protocol-card absolute top-0 left-0 w-full h-screen flex items-center justify-center p-6 sm:p-12 md:p-24 origin-top"
-                    style={{ zIndex: protocols.length - i, backgroundColor: 'var(--background)' }}
+                    className="sticky top-0 w-full h-[100dvh] flex items-center justify-center p-6 sm:p-12 md:p-24 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] overflow-hidden bg-background"
+                    style={{ zIndex: i + 1 }}
                 >
-                    <div className="w-full max-w-6xl h-full max-h-[800px] organic-card flex flex-col md:flex-row overflow-hidden shadow-2xl shadow-dark/5 relative">
+                    <div className="protocol-inner w-full max-w-[1400px] h-full max-h-[80vh] bg-background flex flex-col md:flex-row overflow-hidden rounded-[2rem] border border-dark/10 shadow-2xl relative">
 
-                        <div className="w-full md:w-1/2 p-6 pb-2 md:p-20 flex flex-col justify-center border-r border-dark/5 bg-background relative z-10">
+                        <div className="w-full md:w-1/2 p-10 md:p-24 flex flex-col justify-center border-r border-dark/5 relative z-10">
                             <span className="font-mono text-accent text-lg mb-4 md:mb-8 tracking-widest block">[{protocol.step}]</span>
                             <h2 className="font-sans text-3xl md:text-5xl lg:text-6xl font-bold text-dark tracking-tight mb-4 md:mb-6 text-balance">
                                 {protocol.title}
@@ -117,9 +112,9 @@ export default function Protocol() {
                             </p>
                         </div>
 
-                        <div className="w-full md:w-1/2 bg-background/50 flex items-center justify-center p-6 md:p-20 relative overflow-hidden">
+                        <div className="w-full md:w-1/2 bg-background/50 flex items-center justify-center p-10 md:p-24 relative overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
-                            <div className="w-full aspect-square max-w-[250px] md:max-w-[400px] relative z-10 p-6 md:p-8 bg-background/50 rounded-full border border-dark/5 shadow-sm">
+                            <div className="w-full aspect-square max-w-[250px] md:max-w-[400px] relative z-10 p-8 md:p-12 bg-background rounded-[2rem] border border-dark/5 shadow-lg">
                                 {protocol.anim}
                             </div>
                         </div>

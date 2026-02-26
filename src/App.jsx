@@ -60,12 +60,22 @@ export default function App() {
 
 // Global scroll reset on route changes
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
-  }, [pathname]);
+    if (hash) {
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+        ScrollTrigger.refresh();
+      }, 100); // Wait for DOM layout
+    } else {
+      window.scrollTo(0, 0);
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 100);
+    }
+  }, [pathname, hash]);
   return null;
 }
